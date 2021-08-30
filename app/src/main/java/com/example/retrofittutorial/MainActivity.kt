@@ -23,7 +23,9 @@ class MainActivity : AppCompatActivity() {
 
         /**
          * Using manual dependency Injection
-         * branch- ft-manual-injection
+         * branch- ft-manual-injection:
+         *   1. Add your hilt dependencies and sync
+         *   2. Create your application class that will hold the dependencies
          * Using Hilt
          * branch- ft-hilt
          */
