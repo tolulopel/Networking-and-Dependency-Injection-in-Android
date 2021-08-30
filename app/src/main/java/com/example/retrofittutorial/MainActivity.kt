@@ -5,9 +5,18 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.example.retrofittutorial.network.NetworkClient
+import com.example.retrofittutorial.network.TmdbEndpoint
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import javax.inject.Named
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+   // @Named("retro1")
+    lateinit var tmdbEndpoint: TmdbEndpoint
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -20,9 +29,9 @@ class MainActivity : AppCompatActivity() {
         val limit = 10
         var offset = 0
 
+
         lifecycleScope.launch {
-          val movie1 =  NetworkClient.createTmdbEndpoint().getMovieDetails(limit, offset)
-          offset = movie1.homepage.split("=")[1].split("&")[0].toInt()
+          val movie1 =  tmdbEndpoint.getMovieDetails(API_KEY)
           //  Log.d("MainActivity", "onCreate: ${movie1.genres[0].name}")
         }
     }

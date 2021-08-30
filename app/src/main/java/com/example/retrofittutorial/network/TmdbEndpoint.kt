@@ -5,8 +5,8 @@ import retrofit2.http.*
 
 interface TmdbEndpoint {
 
-    @GET("pokemon")
-    suspend fun getMovieDetails( @Query("limit") limit : Int , @Query("offset") offset : Int) : Movie
+    @GET("movie/550")
+    suspend fun getMovieDetails( @Query("api_key") apiKey : String) : Movie
 
     @POST
     suspend fun postMessage()
