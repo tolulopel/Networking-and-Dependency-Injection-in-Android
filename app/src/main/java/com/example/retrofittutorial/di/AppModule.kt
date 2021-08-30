@@ -1,7 +1,9 @@
 package com.example.retrofittutorial.di
 
-import android.content.SharedPreferences
+import com.example.retrofittutorial.API_KEY
 import com.example.retrofittutorial.BASE_URL
+import com.example.retrofittutorial.model.repository.MovieRepository
+import com.example.retrofittutorial.model.repository.MovieRepositoryImpl
 import com.example.retrofittutorial.network.TmdbEndpoint
 import dagger.Module
 import dagger.Provides
@@ -11,7 +13,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -36,6 +37,16 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(TmdbEndpoint::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideApiKey() : String = API_KEY
+
+    @Singleton
+    @Provides
+    fun provideMovieRepository(tmdbEndpoint: TmdbEndpoint, apiKey : String): MovieRepository{
+        return MovieRepositoryImpl(tmdbEndpoint,apiKey)
     }
 
 }
