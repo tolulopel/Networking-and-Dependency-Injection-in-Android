@@ -9,8 +9,6 @@ import com.example.retrofittutorial.network.NetworkClient
 class App : Application() {
 
     companion object{
-        private lateinit var instance : App
-
         /**
          * Exposing the value as an interface, entire app uses the repository without creating it
          * manually, keeps the initialization in one place and usage in another
@@ -21,10 +19,6 @@ class App : Application() {
                 API_KEY
             )
         }
-    }
-    override fun onCreate() {
-        super.onCreate()
-        instance = this
     }
 
 }
